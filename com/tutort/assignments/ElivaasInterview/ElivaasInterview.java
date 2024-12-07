@@ -22,7 +22,7 @@ public class ElivaasInterview {
     private static String reverseString(String s) {
         String[] words = splitWords(s);
         // can't use inbuilt functions
-        String wordsInBuilt[] = s.split("\\s");
+        String[] wordsInBuilt = s.split("\\s");
         String reverseds = "";
         // reversing the order of words given
         for (int i = words.length - 1; i >= 0; i--) {

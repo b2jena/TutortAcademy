@@ -1,12 +1,16 @@
 # Java Basics and Data Structures
 
 ## What is the `new` keyword?
-The `new` keyword in Java is a fundamental part of the language used to create new objects. When you use the `new` keyword, it performs the following actions:
+
+The `new` keyword in Java is a fundamental part of the language used to create new objects. When you use the `new`
+keyword, it performs the following actions:
+
 1. **Allocates Memory**: Allocates memory for the new object on the heap.
 2. **Calls Constructor**: Invokes the constructor of the class to initialize the new object.
 3. **Returns Reference**: Returns a reference to the newly created object.
 
 ### Example:
+
 ```java
 MyClass obj = new MyClass();
 In this example, `new MyClass()` creates a new instance of `MyClass`, calls its constructor, and assigns the reference to the variable `obj`.
@@ -19,22 +23,31 @@ This is the most common way to create an object. It involves directly invoking t
 ```java
 MyClass obj = new MyClass();
 ```
+
 - **Pros**: Simple and straightforward.
 - **Cons**: Requires knowledge of the class constructor and its parameters.
 
 ### 2. Using Deserialization
-Deserialization is the process of converting a byte stream back into a copy of the object. This is typically used when reading objects from a file or network.
+
+Deserialization is the process of converting a byte stream back into a copy of the object. This is typically used when
+reading objects from a file or network.
+
 ```java
 ObjectInputStream in = new ObjectInputStream(new FileInputStream("objectData.ser"));
 MyClass obj = (MyClass) in.readObject();
 ```
+
 - **Pros**: Useful for reconstructing objects from persistent storage or network.
-- **Cons**: Requires the class to implement `Serializable` interface and handle potential `IOException` and `ClassNotFoundException`.
+- **Cons**: Requires the class to implement `Serializable` interface and handle potential `IOException` and
+  `ClassNotFoundException`.
 
 ## What's the difference between stack and queue?
-Stacks and queues are both abstract data types that store collections of elements, but they differ in how elements are added and removed.
+
+Stacks and queues are both abstract data types that store collections of elements, but they differ in how elements are
+added and removed.
 
 ### Stack
+
 - **Principle**: Last-In-First-Out (LIFO).
 - **Operations**:
     - `push()`: Adds an element to the top of the stack.
@@ -43,6 +56,7 @@ Stacks and queues are both abstract data types that store collections of element
 - **Use Cases**: Function call management, undo mechanisms in text editors, depth-first search algorithms.
 
 ### Queue
+
 - **Principle**: First-In-First-Out (FIFO).
 - **Operations**:
     - `enqueue()`: Adds an element to the rear of the queue.
@@ -51,6 +65,7 @@ Stacks and queues are both abstract data types that store collections of element
 - **Use Cases**: Task scheduling, breadth-first search algorithms, handling requests in web servers.
 
 ### Example:
+
 - **Stack**:
   ```java
   Stack<Integer> stack = new Stack<>();
@@ -68,13 +83,16 @@ Stacks and queues are both abstract data types that store collections of element
   ```
 
 ## How to make a queue using 2 stacks?
-You can implement a queue using two stacks by leveraging the LIFO nature of stacks to achieve FIFO behavior. The idea is to use one stack for enqueue operations and the other for dequeue operations.
+
+You can implement a queue using two stacks by leveraging the LIFO nature of stacks to achieve FIFO behavior. The idea is
+to use one stack for enqueue operations and the other for dequeue operations.
 
 ### Implementation:
+
 ```java
 class QueueUsingStacks {
-    private Stack<Integer> stack1 = new Stack<>();
-    private Stack<Integer> stack2 = new Stack<>();
+    private final Stack<Integer> stack1 = new Stack<>();
+    private final Stack<Integer> stack2 = new Stack<>();
 
     // Enqueue operation
     public void enqueue(int x) {
@@ -97,12 +115,15 @@ class QueueUsingStacks {
 ```
 
 ### Explanation:
+
 1. **Enqueue Operation**: Push the element onto `stack1`.
 2. **Dequeue Operation**:
-    - If `stack2` is empty, transfer all elements from `stack1` to `stack2` by popping from `stack1` and pushing onto `stack2`.
+    - If `stack2` is empty, transfer all elements from `stack1` to `stack2` by popping from `stack1` and pushing onto
+      `stack2`.
     - Pop the top element from `stack2`.
 
 ### Usage:
+
 ```java
 QueueUsingStacks queue = new QueueUsingStacks();
 queue.enqueue(1);
@@ -112,6 +133,7 @@ int second = queue.dequeue(); // second = 2
 ```
 
 This implementation ensures that the queue operations maintain the FIFO order using two LIFO stacks.
+
 ```
 # Serialization in Java
 
@@ -150,12 +172,14 @@ public class Student implements Serializable {
 ```
 
 ### ObjectOutputStream and ObjectInputStream
+
 Java provides `ObjectOutputStream` and `ObjectInputStream` classes to handle serialization and deserialization.
 
 - **ObjectOutputStream**: Writes objects to an output stream.
 - **ObjectInputStream**: Reads objects from an input stream.
 
 ### Serialization Example:
+
 ```java
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -177,6 +201,7 @@ public class SerializeExample {
 ```
 
 ### Deserialization Example:
+
 ```java
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -202,12 +227,18 @@ public class DeserializeExample {
 ## Advanced Concepts
 
 ### SerialVersionUID
-The `serialVersionUID` is a unique identifier for each class. It is used during deserialization to verify that the sender and receiver of a serialized object have loaded classes for that object that are compatible with respect to serialization.
+
+The `serialVersionUID` is a unique identifier for each class. It is used during deserialization to verify that the
+sender and receiver of a serialized object have loaded classes for that object that are compatible with respect to
+serialization.
 
 ### Transient Keyword
-Fields marked with the `transient` keyword are not serialized. This is useful for fields that do not represent the object's state or are sensitive and should not be stored.
+
+Fields marked with the `transient` keyword are not serialized. This is useful for fields that do not represent the
+object's state or are sensitive and should not be stored.
 
 ### Example:
+
 ```java
 public class Student implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -220,9 +251,12 @@ public class Student implements Serializable {
 ```
 
 ### Externalizable Interface
-The `Externalizable` interface provides more control over the serialization process. It requires the implementation of two methods: `writeExternal` and `readExternal`.
+
+The `Externalizable` interface provides more control over the serialization process. It requires the implementation of
+two methods: `writeExternal` and `readExternal`.
 
 ### Example:
+
 ```java
 import java.io.Externalizable;
 import java.io.IOException;
@@ -257,18 +291,22 @@ public class Student implements Externalizable {
 ```
 
 ## Benefits of Serialization
+
 - **Persistence**: Save the state of an object to a file or database.
 - **Communication**: Send objects over a network between different JVMs.
 - **Caching**: Store objects in memory for faster access.
 
 ## Use Cases
+
 - **Hibernate**: For object-relational mapping (ORM).
 - **Remote Method Invocation (RMI)**: To pass objects between JVMs.
 - **Java Message Service (JMS)**: For messaging between applications.
 
-Serialization is a powerful feature in Java that enables the easy storage and transmission of objects. Understanding how to use it effectively can greatly enhance your ability to work with complex data structures and distributed systems.
+Serialization is a powerful feature in Java that enables the easy storage and transmission of objects. Understanding how
+to use it effectively can greatly enhance your ability to work with complex data structures and distributed systems.
 
 If you have any more questions or need further clarification, feel free to ask!
+
 ```
 
 This detailed explanation should provide a comprehensive understanding of serialization in Java. If you need more specific examples or have additional questions, let me know!
