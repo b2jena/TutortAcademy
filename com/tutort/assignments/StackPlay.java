@@ -1,6 +1,7 @@
 package com.tutort.assignments;
 
 import java.util.Stack;
+
 // https://www.geeksforgeeks.org/stack-class-in-java/
 public class StackPlay {
     public static void main(String[] args) {
@@ -25,7 +26,7 @@ public class StackPlay {
         s.push(4);
 
         // Pop elements from the stack
-        while(!s.isEmpty()) {
+        while (!s.isEmpty()) {
             System.out.println(s.pop());
         }
     }
