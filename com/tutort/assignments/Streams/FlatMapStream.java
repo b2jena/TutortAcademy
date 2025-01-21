@@ -7,6 +7,9 @@ import java.util.stream.Collectors;
 
 public class FlatMapStream {
     public static void main(String[] args) {
+        /**
+         * A stream can hold complex data structures like Stream<List<String>>. In cases like this, flatMap() helps us to flatten the data structure to simplify further operations:
+         */
         List<List<String>> namesNested = Arrays.asList(
                 Arrays.asList("Jeff", "Bezos"),
                 Arrays.asList("Bill", "Gates"),
