@@ -23,15 +23,15 @@ public class ElivaasInterview {
         String[] words = splitWords(s);
         // can't use inbuilt functions
         String[] wordsInBuilt = s.split("\\s");
-        String reverseds = "";
+        StringBuilder reverseds = new StringBuilder();
         // reversing the order of words given
         for (int i = words.length - 1; i >= 0; i--) {
-            reverseds += words[i];
+            reverseds.append(words[i]);
             if (i != 0) {
-                reverseds += " ";
+                reverseds.append(" ");
             }
         }
-        return reverseds;
+        return reverseds.toString();
     }
 
     private static String[] splitWords(String s) {
