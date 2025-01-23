@@ -108,10 +108,7 @@ public class Main {
         }
 
         public void solve(int testNumber, InputReader sc, PrintWriter out, StringBuilder sb) throws IOException {
-            // TODO SOLUTION
             int n = sc.nextInt();
-//            StringBuilder sb = new StringBuilder("");
-
             int maxlen = sc.nextInt() - 1;
             int power = sc.nextInt();
             int ans = 0;
@@ -120,7 +117,6 @@ public class Main {
             int cur = maxlen;
 
             for (int i = 0; i < ch.length; i++) {
-//                System.out.print(cur + " ");
                 if (ch[i] == '0') cur--;
                 else cur = maxlen;
 
@@ -134,7 +130,6 @@ public class Main {
                     cur = maxlen;
                 }
             }
-//            System.out.println(Arrays.toString(ch));
             sb.append(ans + "\n");
         }
     }
