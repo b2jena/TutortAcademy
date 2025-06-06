@@ -16,8 +16,8 @@ class Sender {
 
 // Class for send a message using Threads
 class ThreadedSend extends Thread {
-    Sender sender;
     private final String msg;
+    Sender sender;
 
     // Receives a message object and a string
     // message to be sent
