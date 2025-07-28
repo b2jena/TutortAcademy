@@ -84,11 +84,12 @@ data[^1][^2][^3].
 // Abstract class example
 abstract class Vehicle {
     protected String brand;
-    
+
     // Abstract method - must be implemented by subclasses
     public abstract void start();
+
     public abstract void stop();
-    
+
     // Concrete method - can be used directly
     public void displayBrand() {
         System.out.println("Brand: " + brand);
@@ -99,12 +100,12 @@ class Car extends Vehicle {
     public Car(String brand) {
         this.brand = brand;
     }
-    
+
     @Override
     public void start() {
         System.out.println("Car engine started with key");
     }
-    
+
     @Override
     public void stop() {
         System.out.println("Car engine stopped");
@@ -115,12 +116,12 @@ class Motorcycle extends Vehicle {
     public Motorcycle(String brand) {
         this.brand = brand;
     }
-    
+
     @Override
     public void start() {
         System.out.println("Motorcycle started with kick/button");
     }
-    
+
     @Override
     public void stop() {
         System.out.println("Motorcycle engine stopped");
@@ -134,7 +135,9 @@ class Motorcycle extends Vehicle {
 // Interface example - 100% abstraction
 interface PaymentProcessor {
     void processPayment(double amount);
+
     boolean validatePayment(String details);
+
     void sendConfirmation(String email);
 }
 
@@ -144,13 +147,13 @@ class CreditCardProcessor implements PaymentProcessor {
         System.out.println("Processing credit card payment: $" + amount);
         // Credit card specific logic
     }
-    
+
     @Override
     public boolean validatePayment(String cardDetails) {
         // Validate credit card details
         return cardDetails.length() == 16;
     }
-    
+
     @Override
     public void sendConfirmation(String email) {
         System.out.println("Credit card payment confirmation sent to: " + email);
@@ -163,13 +166,13 @@ class PayPalProcessor implements PaymentProcessor {
         System.out.println("Processing PayPal payment: $" + amount);
         // PayPal specific logic
     }
-    
+
     @Override
     public boolean validatePayment(String paypalId) {
         // Validate PayPal account
         return paypalId.contains("@");
     }
-    
+
     @Override
     public void sendConfirmation(String email) {
         System.out.println("PayPal payment confirmation sent to: " + email);
@@ -188,7 +191,7 @@ public class BankAccount {
     private double balance;
     private String customerName;
     private static final double MIN_BALANCE = 100.0;
-    
+
     // Constructor
     public BankAccount(String accountNumber, String customerName, double initialBalance) {
         this.accountNumber = accountNumber;
@@ -199,20 +202,20 @@ public class BankAccount {
             throw new IllegalArgumentException("Initial balance must be at least $" + MIN_BALANCE);
         }
     }
-    
+
     // Public getter methods - controlled access to read data
     public String getAccountNumber() {
         return accountNumber;
     }
-    
+
     public String getCustomerName() {
         return customerName;
     }
-    
+
     public double getBalance() {
         return balance;
     }
-    
+
     // Public setter with validation - controlled access to modify data
     public void setCustomerName(String customerName) {
         if (customerName != null && !customerName.trim().isEmpty()) {
@@ -221,7 +224,7 @@ public class BankAccount {
             throw new IllegalArgumentException("Customer name cannot be empty");
         }
     }
-    
+
     // Business methods with validation
     public void deposit(double amount) {
         if (amount > 0) {
@@ -231,7 +234,7 @@ public class BankAccount {
             throw new IllegalArgumentException("Deposit amount must be positive");
         }
     }
-    
+
     public void withdraw(double amount) {
         if (amount > 0 && (balance - amount) >= MIN_BALANCE) {
             balance -= amount;
@@ -240,7 +243,7 @@ public class BankAccount {
             throw new IllegalArgumentException("Invalid withdrawal amount or insufficient balance");
         }
     }
-    
+
     // Private helper method - internal implementation detail
     private boolean isValidTransaction(double amount) {
         return amount > 0 && amount <= balance;
@@ -251,14 +254,14 @@ public class BankAccount {
 public class Main {
     public static void main(String[] args) {
         BankAccount account = new BankAccount("ACC123", "John Doe", 500.0);
-        
+
         // Can access data only through public methods
         System.out.println("Account: " + account.getAccountNumber());
         System.out.println("Balance: $" + account.getBalance());
-        
+
         account.deposit(200.0);
         account.withdraw(100.0);
-        
+
         // Direct access to private fields would cause compilation error
         // account.balance = 1000000; // This would not compile
     }
@@ -303,8 +306,8 @@ Java Streams API, introduced in Java 8, provides a functional approach to proces
 ```java
 List<String> names = Arrays.asList("Alice", "Bob", "Charlie", "David");
 List<String> filteredNames = names.stream()
-    .filter(name -> name.length() > 4)  // Keep names longer than 4 characters
-    .collect(Collectors.toList());
+        .filter(name -> name.length() > 4)  // Keep names longer than 4 characters
+        .collect(Collectors.toList());
 // Result: [Alice, Charlie, David]
 ```
 
@@ -313,13 +316,13 @@ List<String> filteredNames = names.stream()
 ```java
 List<String> words = Arrays.asList("hello", "world", "java");
 List<Integer> lengths = words.stream()
-    .map(String::length)  // Convert each string to its length
-    .collect(Collectors.toList());
+        .map(String::length)  // Convert each string to its length
+        .collect(Collectors.toList());
 // Result: [5, 5, 4]
 
 List<String> upperCase = words.stream()
-    .map(String::toUpperCase)  // Convert to uppercase
-    .collect(Collectors.toList());
+        .map(String::toUpperCase)  // Convert to uppercase
+        .collect(Collectors.toList());
 // Result: [HELLO, WORLD, JAVA]
 ```
 
@@ -327,14 +330,14 @@ List<String> upperCase = words.stream()
 
 ```java
 List<List<String>> listOfLists = Arrays.asList(
-    Arrays.asList("a", "b"),
-    Arrays.asList("c", "d"),
-    Arrays.asList("e", "f")
+        Arrays.asList("a", "b"),
+        Arrays.asList("c", "d"),
+        Arrays.asList("e", "f")
 );
 
 List<String> flattened = listOfLists.stream()
-    .flatMap(List::stream)  // Flatten nested lists
-    .collect(Collectors.toList());
+        .flatMap(List::stream)  // Flatten nested lists
+        .collect(Collectors.toList());
 // Result: [a, b, c, d, e, f]
 ```
 
@@ -343,8 +346,8 @@ List<String> flattened = listOfLists.stream()
 ```java
 List<Integer> numbers = Arrays.asList(1, 2, 2, 3, 3, 4, 5);
 List<Integer> unique = numbers.stream()
-    .distinct()  // Remove duplicates
-    .collect(Collectors.toList());
+        .distinct()  // Remove duplicates
+        .collect(Collectors.toList());
 // Result: [1, 2, 3, 4, 5]
 ```
 
@@ -353,13 +356,13 @@ List<Integer> unique = numbers.stream()
 ```java
 List<String> names = Arrays.asList("Charlie", "Alice", "Bob");
 List<String> sorted = names.stream()
-    .sorted()  // Natural ordering
-    .collect(Collectors.toList());
+        .sorted()  // Natural ordering
+        .collect(Collectors.toList());
 // Result: [Alice, Bob, Charlie]
 
 List<String> sortedByLength = names.stream()
-    .sorted(Comparator.comparing(String::length))  // Custom comparator
-    .collect(Collectors.toList());
+        .sorted(Comparator.comparing(String::length))  // Custom comparator
+        .collect(Collectors.toList());
 // Result: [Bob, Alice, Charlie]
 ```
 
@@ -369,14 +372,14 @@ List<String> sortedByLength = names.stream()
 List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
 
 List<Integer> first5 = numbers.stream()
-    .limit(5)  // Take first 5 elements
-    .collect(Collectors.toList());
+        .limit(5)  // Take first 5 elements
+        .collect(Collectors.toList());
 // Result: [1, 2, 3, 4, 5]
 
 List<Integer> skip3Take3 = numbers.stream()
-    .skip(3)   // Skip first 3 elements
-    .limit(3)  // Take next 3 elements
-    .collect(Collectors.toList());
+        .skip(3)   // Skip first 3 elements
+        .limit(3)  // Take next 3 elements
+        .collect(Collectors.toList());
 // Result: [4, 5, 6]
 ```
 
@@ -395,18 +398,18 @@ Set<String> set = names.stream().collect(Collectors.toSet());
 
 // Collect to Map
 Map<String, Integer> nameToLength = names.stream()
-    .collect(Collectors.toMap(
-        name -> name,           // key mapper
-        String::length          // value mapper
-    ));
+        .collect(Collectors.toMap(
+                name -> name,           // key mapper
+                String::length          // value mapper
+        ));
 
 // Group by length
 Map<Integer, List<String>> groupedByLength = names.stream()
-    .collect(Collectors.groupingBy(String::length));
+        .collect(Collectors.groupingBy(String::length));
 
 // Join strings
 String joined = names.stream()
-    .collect(Collectors.joining(", ", "[", "]"));
+        .collect(Collectors.joining(", ", "[", "]"));
 // Result: [Alice, Bob, Charlie]
 ```
 
@@ -417,17 +420,17 @@ List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5);
 
 // Sum all numbers
 Optional<Integer> sum = numbers.stream()
-    .reduce((a, b) -> a + b);
+        .reduce((a, b) -> a + b);
 // Result: Optional[^15]
 
 // With identity value
 Integer sum2 = numbers.stream()
-    .reduce(0, Integer::sum);
+        .reduce(0, Integer::sum);
 // Result: 15
 
 // Find maximum
 Optional<Integer> max = numbers.stream()
-    .reduce(Integer::max);
+        .reduce(Integer::max);
 // Result: Optional[^5]
 ```
 
@@ -435,9 +438,17 @@ Optional<Integer> max = numbers.stream()
 
 ```java
 List<String> names = Arrays.asList("Alice", "Bob", "Charlie");
-names.stream()
-    .filter(name -> name.length() > 3)
-    .forEach(System.out::println);
+names.
+
+stream()
+    .
+
+filter(name ->name.
+
+length() >3)
+        .
+
+forEach(System.out::println);
 // Prints: Alice, Charlie
 ```
 
@@ -447,13 +458,13 @@ names.stream()
 List<Integer> numbers = Arrays.asList(2, 4, 6, 8, 10);
 
 boolean allEven = numbers.stream()
-    .allMatch(n -> n % 2 == 0);  // true
+        .allMatch(n -> n % 2 == 0);  // true
 
 boolean anyGreaterThan5 = numbers.stream()
-    .anyMatch(n -> n > 5);       // true
+        .anyMatch(n -> n > 5);       // true
 
 boolean noneNegative = numbers.stream()
-    .noneMatch(n -> n < 0);      // true
+        .noneMatch(n -> n < 0);      // true
 ```
 
 **5. Finding Operations**
@@ -462,12 +473,12 @@ boolean noneNegative = numbers.stream()
 List<String> names = Arrays.asList("Alice", "Bob", "Charlie");
 
 Optional<String> first = names.stream()
-    .filter(name -> name.startsWith("C"))
-    .findFirst();  // Optional[Charlie]
+        .filter(name -> name.startsWith("C"))
+        .findFirst();  // Optional[Charlie]
 
 Optional<String> any = names.stream()
-    .filter(name -> name.length() > 3)
-    .findAny();    // Optional[Alice] (or any matching element)
+        .filter(name -> name.length() > 3)
+        .findAny();    // Optional[Alice] (or any matching element)
 ```
 
 ### **map() vs flatMap() - Detailed Comparison**
@@ -481,8 +492,8 @@ transformation and flattens the result**[^16][^17][^18][^19].
 // map() transforms each element to exactly one output element
 List<String> words = Arrays.asList("hello", "world");
 List<Integer> lengths = words.stream()
-    .map(String::length)  // String -> Integer (1:1 mapping)
-    .collect(Collectors.toList());
+        .map(String::length)  // String -> Integer (1:1 mapping)
+        .collect(Collectors.toList());
 // Input: ["hello", "world"]
 // Output: [5, 5]
 
@@ -495,8 +506,8 @@ List<Integer> lengths = words.stream()
 // flatMap() transforms each element to a stream, then flattens all streams
 List<String> sentences = Arrays.asList("hello world", "java streams");
 List<String> words = sentences.stream()
-    .flatMap(sentence -> Arrays.stream(sentence.split(" ")))  // String -> Stream<String>
-    .collect(Collectors.toList());
+        .flatMap(sentence -> Arrays.stream(sentence.split(" ")))  // String -> Stream<String>
+        .collect(Collectors.toList());
 // Input: ["hello world", "java streams"]
 // Output: ["hello", "world", "java", "streams"]
 
@@ -510,33 +521,33 @@ List<String> words = sentences.stream()
 class Department {
     private String name;
     private List<Employee> employees;
-    
+
     // constructors, getters...
 }
 
 class Employee {
     private String name;
     private List<String> skills;
-    
+
     // constructors, getters...
 }
 
 List<Department> departments = Arrays.asList(
-    new Department("IT", Arrays.asList(
-        new Employee("Alice", Arrays.asList("Java", "Python")),
-        new Employee("Bob", Arrays.asList("JavaScript", "React"))
-    )),
-    new Department("HR", Arrays.asList(
-        new Employee("Charlie", Arrays.asList("Recruiting", "Training"))
-    ))
+        new Department("IT", Arrays.asList(
+                new Employee("Alice", Arrays.asList("Java", "Python")),
+                new Employee("Bob", Arrays.asList("JavaScript", "React"))
+        )),
+        new Department("HR", Arrays.asList(
+                new Employee("Charlie", Arrays.asList("Recruiting", "Training"))
+        ))
 );
 
 // Get all skills from all employees in all departments
 List<String> allSkills = departments.stream()
-    .flatMap(dept -> dept.getEmployees().stream())        // Department -> Stream<Employee>
-    .flatMap(emp -> emp.getSkills().stream())             // Employee -> Stream<String>
-    .distinct()
-    .collect(Collectors.toList());
+        .flatMap(dept -> dept.getEmployees().stream())        // Department -> Stream<Employee>
+        .flatMap(emp -> emp.getSkills().stream())             // Employee -> Stream<String>
+        .distinct()
+        .collect(Collectors.toList());
 // Result: ["Java", "Python", "JavaScript", "React", "Recruiting", "Training"]
 ```
 
@@ -562,39 +573,39 @@ List<String> allSkills = departments.stream()
 
 ```java
 public class CalculatorServiceTest {  // Class name: [ClassUnderTest]Test
-    
+
     private CalculatorService calculatorService;
-    
+
     @BeforeEach
     void setUp() {
         calculatorService = new CalculatorService();
     }
-    
+
     @AfterEach
     void tearDown() {
         // Cleanup if needed
     }
-    
+
     // Test method naming conventions
     @Test
     void add_TwoPositiveNumbers_ReturnsSum() {  // methodName_StateUnderTest_ExpectedBehavior
         // Arrange
         int a = 5;
         int b = 3;
-        
+
         // Act
         int result = calculatorService.add(a, b);
-        
+
         // Assert
         assertEquals(8, result);
     }
-    
+
     @Test
     void divide_ByZero_ThrowsArithmeticException() {
         // Arrange
         int dividend = 10;
         int divisor = 0;
-        
+
         // Act & Assert
         assertThrows(ArithmeticException.class, () -> {
             calculatorService.divide(dividend, divisor);
@@ -616,37 +627,40 @@ public class CalculatorServiceTest {  // Class name: [ClassUnderTest]Test
 ```java
 // Pattern 1: methodName_StateUnderTest_ExpectedBehavior
 @Test
-void calculateTotal_WithValidItems_ReturnsCorrectSum() { }
+void calculateTotal_WithValidItems_ReturnsCorrectSum() {
+}
 
 // Pattern 2: should_ExpectedBehavior_When_StateUnderTest
 @Test
-void should_ReturnTrue_When_EmailIsValid() { }
+void should_ReturnTrue_When_EmailIsValid() {
+}
 
 // Pattern 3: Given_When_Then format
 @Test
-void given_EmptyList_When_AddingItem_Then_SizeIsOne() { }
+void given_EmptyList_When_AddingItem_Then_SizeIsOne() {
+}
 ```
 
 **3. Test Organization**[^20][^21]
 
 ```java
 public class UserServiceTest {
-    
+
     // One test class per production class
     private UserService userService;
     private UserRepository mockUserRepository;
-    
+
     @BeforeEach
     void setUp() {
         mockUserRepository = mock(UserRepository.class);
         userService = new UserService(mockUserRepository);
     }
-    
+
     // Nested test classes for grouping related tests
     @Nested
     @DisplayName("User Creation Tests")
     class UserCreationTests {
-        
+
         @Test
         @DisplayName("Should create user successfully with valid data")
         void createUser_ValidData_Success() {
@@ -654,39 +668,39 @@ public class UserServiceTest {
             CreateUserRequest request = new CreateUserRequest("john@example.com", "John Doe");
             User expectedUser = new User("john@example.com", "John Doe");
             when(mockUserRepository.save(any(User.class))).thenReturn(expectedUser);
-            
+
             // Act
             User result = userService.createUser(request);
-            
+
             // Assert
             assertThat(result.getEmail()).isEqualTo("john@example.com");
             assertThat(result.getName()).isEqualTo("John Doe");
             verify(mockUserRepository).save(any(User.class));
         }
-        
+
         @Test
         void createUser_InvalidEmail_ThrowsException() {
             // Arrange
             CreateUserRequest request = new CreateUserRequest("invalid-email", "John Doe");
-            
+
             // Act & Assert
             assertThrows(InvalidEmailException.class, () -> {
                 userService.createUser(request);
             });
-            
+
             verify(mockUserRepository, never()).save(any(User.class));
         }
     }
-    
+
     @Nested
     @DisplayName("User Retrieval Tests")
     class UserRetrievalTests {
-        
+
         @Test
         void findUser_ExistingId_ReturnsUser() {
             // Test implementation
         }
-        
+
         @Test
         void findUser_NonExistingId_ThrowsNotFoundException() {
             // Test implementation
@@ -698,6 +712,7 @@ public class UserServiceTest {
 **4. Parameterized Tests**[^20]
 
 ```java
+
 @ParameterizedTest
 @ValueSource(strings = {"john@example.com", "jane.doe@company.org", "user+tag@domain.co.uk"})
 void isValidEmail_ValidEmails_ReturnsTrue(String email) {
@@ -706,10 +721,10 @@ void isValidEmail_ValidEmails_ReturnsTrue(String email) {
 
 @ParameterizedTest
 @CsvSource({
-    "5, 3, 8",
-    "10, -2, 8", 
-    "0, 0, 0",
-    "-5, -3, -8"
+        "5, 3, 8",
+        "10, -2, 8",
+        "0, 0, 0",
+        "-5, -3, -8"
 })
 void add_VariousInputs_ReturnsExpectedSum(int a, int b, int expected) {
     assertEquals(expected, calculator.add(a, b));
@@ -723,11 +738,11 @@ void isValidEmail_InvalidEmails_ReturnsFalse(String email) {
 
 private static Stream<String> provideInvalidEmails() {
     return Stream.of(
-        "invalid-email",
-        "@example.com",
-        "user@",
-        "user name@example.com",
-        ""
+            "invalid-email",
+            "@example.com",
+            "user@",
+            "user name@example.com",
+            ""
     );
 }
 ```
@@ -736,9 +751,10 @@ private static Stream<String> provideInvalidEmails() {
 
 ```java
 // Use specific assertions
-assertEquals(expected, actual, "Custom error message");
-assertTrue(condition, "Should be true because...");
-assertNotNull(object, "Object should not be null");
+
+assertEquals(expected,actual,"Custom error message");
+        assertTrue(condition,"Should be true because...");
+        assertNotNull(object,"Object should not be null");
 
 // AssertJ for more readable assertions
 import static org.assertj.core.api.Assertions.*;
@@ -746,48 +762,49 @@ import static org.assertj.core.api.Assertions.*;
 @Test
 void complexAssertions() {
     List<User> users = userService.getAllUsers();
-    
+
     assertThat(users)
-        .isNotEmpty()
-        .hasSize(3)
-        .extracting(User::getName)
-        .containsExactly("Alice", "Bob", "Charlie");
-        
+            .isNotEmpty()
+            .hasSize(3)
+            .extracting(User::getName)
+            .containsExactly("Alice", "Bob", "Charlie");
+
     User user = users.get(0);
     assertThat(user)
-        .satisfies(u -> {
-            assertThat(u.getName()).isEqualTo("Alice");
-            assertThat(u.getAge()).isBetween(25, 35);
-            assertThat(u.getEmails()).containsExactly("alice@example.com");
-        });
+            .satisfies(u -> {
+                assertThat(u.getName()).isEqualTo("Alice");
+                assertThat(u.getAge()).isBetween(25, 35);
+                assertThat(u.getEmails()).containsExactly("alice@example.com");
+            });
 }
 ```
 
 **6. Test Doubles (Mocking)**[^21]
 
 ```java
+
 @ExtendWith(MockitoExtension.class)
 class OrderServiceTest {
-    
+
     @Mock
     private PaymentService paymentService;
-    
-    @Mock  
+
+    @Mock
     private InventoryService inventoryService;
-    
+
     @InjectMocks
     private OrderService orderService;
-    
+
     @Test
     void processOrder_ValidOrder_Success() {
         // Arrange
         Order order = new Order("item1", 2, 100.0);
         when(inventoryService.hasStock("item1", 2)).thenReturn(true);
         when(paymentService.processPayment(200.0)).thenReturn(true);
-        
+
         // Act
         OrderResult result = orderService.processOrder(order);
-        
+
         // Assert
         assertThat(result.isSuccess()).isTrue();
         verify(inventoryService).reserveStock("item1", 2);
@@ -804,12 +821,14 @@ class OrderServiceTest {
 
 ```java
 // Application properties for Dynatrace
-# Dynatrace OneAgent configuration
+#Dynatrace OneAgent
+configuration
 dynatrace.server.url=https://your-environment.dynatrace.com/api
 dynatrace.api.token=your-api-token
 dynatrace.entity.name=your-application-name
 
-# JVM arguments for Dynatrace
+#
+JVM arguments for Dynatrace
 -javaagent:/opt/dynatrace/oneagent/agent/lib64/liboneagentproc.so
 -Dserver.name=your-server-name
 -Ddt_tenant=your-tenant-id
@@ -819,29 +838,30 @@ dynatrace.entity.name=your-application-name
 
 ```java
 // Custom metrics with Dynatrace
+
 import com.dynatrace.oneagent.sdk.OneAgentSDK;
 import com.dynatrace.oneagent.sdk.api.OneAgent;
 
 @Service
 public class OrderService {
-    
+
     private static final OneAgent oneAgent = OneAgentSDK.createInstance();
-    
+
     public void processOrder(Order order) {
         // Create custom metric
         oneAgent.createCustomRequestTracer("processOrder")
-            .setRequestName("Order Processing")
-            .start();
-        
+                .setRequestName("Order Processing")
+                .start();
+
         try {
             // Business logic
             processPayment(order);
             updateInventory(order);
-            
+
             // Custom business metric
             oneAgent.addCustomRequestAttribute("order.amount", order.getAmount());
             oneAgent.addCustomRequestAttribute("order.items", order.getItemCount());
-            
+
         } catch (Exception e) {
             oneAgent.addCustomRequestAttribute("error.type", e.getClass().getSimpleName());
             throw e;
@@ -858,6 +878,7 @@ public class OrderService {
 
 ```java
 // CloudWatch integration with Spring Boot
+
 import com.amazonaws.services.cloudwatch.AmazonCloudWatch;
 import com.amazonaws.services.cloudwatch.model.PutMetricDataRequest;
 import com.amazonaws.services.cloudwatch.model.MetricDatum;
@@ -865,23 +886,23 @@ import com.amazonaws.services.cloudwatch.model.Dimension;
 
 @Service
 public class MetricsService {
-    
+
     private final AmazonCloudWatch cloudWatch;
-    
+
     public void publishCustomMetric(String metricName, double value, String unit) {
         MetricDatum datum = new MetricDatum()
-            .withMetricName(metricName)
-            .withValue(value)
-            .withUnit(unit)
-            .withDimensions(
-                new Dimension().withName("Environment").withValue("production"),
-                new Dimension().withName("Service").withValue("order-service")
-            );
-            
+                .withMetricName(metricName)
+                .withValue(value)
+                .withUnit(unit)
+                .withDimensions(
+                        new Dimension().withName("Environment").withValue("production"),
+                        new Dimension().withName("Service").withValue("order-service")
+                );
+
         PutMetricDataRequest request = new PutMetricDataRequest()
-            .withNamespace("CustomApp/OrderService")
-            .withMetricData(datum);
-            
+                .withNamespace("CustomApp/OrderService")
+                .withMetricData(datum);
+
         cloudWatch.putMetricData(request);
     }
 }
@@ -889,21 +910,21 @@ public class MetricsService {
 // Usage in business logic
 @RestController
 public class OrderController {
-    
+
     @Autowired
     private MetricsService metricsService;
-    
+
     @PostMapping("/orders")
     public ResponseEntity<Order> createOrder(@RequestBody OrderRequest request) {
         long startTime = System.currentTimeMillis();
-        
+
         try {
             Order order = orderService.createOrder(request);
-            
+
             // Publish success metrics
             metricsService.publishCustomMetric("OrdersCreated", 1.0, "Count");
             metricsService.publishCustomMetric("OrderValue", order.getAmount(), "None");
-            
+
             return ResponseEntity.ok(order);
         } catch (Exception e) {
             metricsService.publishCustomMetric("OrderCreationErrors", 1.0, "Count");
@@ -923,31 +944,31 @@ public class OrderController {
 @Component
 @ManagedResource(objectName = "com.company.app:type=OrderMetrics")
 public class OrderMetricsBean {
-    
+
     private final AtomicLong totalOrders = new AtomicLong(0);
     private final AtomicLong failedOrders = new AtomicLong(0);
-    
+
     @ManagedAttribute
     public long getTotalOrders() {
         return totalOrders.get();
     }
-    
-    @ManagedAttribute  
+
+    @ManagedAttribute
     public long getFailedOrders() {
         return failedOrders.get();
     }
-    
+
     @ManagedAttribute
     public double getSuccessRate() {
         long total = totalOrders.get();
         if (total == 0) return 100.0;
-        return ((double)(total - failedOrders.get()) / total) * 100.0;
+        return ((double) (total - failedOrders.get()) / total) * 100.0;
     }
-    
+
     public void incrementTotalOrders() {
         totalOrders.incrementAndGet();
     }
-    
+
     public void incrementFailedOrders() {
         failedOrders.incrementAndGet();
     }
@@ -961,7 +982,7 @@ public class OrderMetricsBean {
 ```java
 // logback-spring.xml configuration for SumoLogic
 <configuration>
-    <appender name="SUMOLOGIC" class="com.sumologic.logback.http.SumoLogicAppender">
+    <appender name="SUMOLOGIC"class="com.sumologic.logback.http.SumoLogicAppender">
         <url>https://collectors.sumologic.com/receiver/v1/http/[collector-url]</url>
         <sourceName>order-service</sourceName>
         <sourceCategory>production/java</sourceCategory>
@@ -980,44 +1001,45 @@ public class OrderMetricsBean {
     </appender>
     
     <root level="INFO">
-        <appender-ref ref="SUMOLOGIC"/>
-    </root>
-</configuration>
+        <appender-
+ref ref = "SUMOLOGIC" / >
+        < / root >
+        < / configuration >
 
 // Structured logging in application
 import org.slf4j.MDC;
 
 @Service
 public class OrderService {
-    
+
     private static final Logger logger = LoggerFactory.getLogger(OrderService.class);
-    
+
     public Order processOrder(OrderRequest request) {
         // Add context to all log messages
         MDC.put("orderId", request.getOrderId());
         MDC.put("customerId", request.getCustomerId());
         MDC.put("operation", "processOrder");
-        
+
         try {
-            logger.info("Starting order processing", 
-                kv("orderAmount", request.getAmount()),
-                kv("itemCount", request.getItems().size())
+            logger.info("Starting order processing",
+                    kv("orderAmount", request.getAmount()),
+                    kv("itemCount", request.getItems().size())
             );
-            
+
             Order order = createOrder(request);
-            
+
             logger.info("Order processed successfully",
-                kv("orderId", order.getId()),
-                kv("processingTime", order.getProcessingTime())
+                    kv("orderId", order.getId()),
+                    kv("processingTime", order.getProcessingTime())
             );
-            
+
             return order;
-            
+
         } catch (PaymentException e) {
             logger.error("Payment processing failed",
-                kv("errorCode", e.getErrorCode()),
-                kv("errorMessage", e.getMessage()),
-                e
+                    kv("errorCode", e.getErrorCode()),
+                    kv("errorMessage", e.getMessage()),
+                    e
             );
             throw e;
         } finally {
@@ -1047,31 +1069,31 @@ public class Solution {
         if (s == null || s.length() == 0 || k == 0) {
             return 0;
         }
-        
+
         Map<Character, Integer> charCount = new HashMap<>();
         int maxLength = 0;
         int left = 0;
-        
+
         for (int right = 0; right < s.length(); right++) {
             // Expand window: add character at right pointer
             char rightChar = s.charAt(right);
             charCount.put(rightChar, charCount.getOrDefault(rightChar, 0) + 1);
-            
+
             // Contract window: if more than k distinct characters
             while (charCount.size() > k) {
                 char leftChar = s.charAt(left);
                 charCount.put(leftChar, charCount.get(leftChar) - 1);
-                
+
                 if (charCount.get(leftChar) == 0) {
                     charCount.remove(leftChar);
                 }
                 left++;
             }
-            
+
             // Update maximum length
             maxLength = Math.max(maxLength, right - left + 1);
         }
-        
+
         return maxLength;
     }
 }
