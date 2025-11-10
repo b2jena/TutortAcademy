@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1" name="viewport"/>
+    <title>Bikash Jena — Resume</title>
+    <meta content="Resume of Bikash Jena. View or download the PDF." name="description"/>
+    <meta content="Bikash Jena — Resume" property="og:title"/>
+    <meta content="View or download the resume PDF." property="og:description"/>
+    <meta content="website" property="og:type"/>
+    <meta content="index,follow" name="robots"/>
+    <style>
+        :root {
+            color-scheme: light dark;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html, body {
+            height: 100%;
+            margin: 0;
+            font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+        }
+
+        header, footer {
+            padding: 1rem;
+        }
+
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            border-bottom: 1px solid rgba(0, 0, 0, .1);
+        }
+
+        h1 {
+            font-size: 1.1rem;
+            margin: 0;
+        }
+
+        .actions {
+            display: flex;
+            gap: .5rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: .5rem;
+            padding: .6rem .9rem;
+            border-radius: .5rem;
+            text-decoration: none;
+            border: 1px solid rgba(0, 0, 0, .2);
+        }
+
+        .btn.primary {
+            background: #0ea5e9;
+            color: #fff;
+            border-color: #0ea5e9;
+        }
+
+        .container {
+            flex: 1 1 auto;
+            min-height: 0;
+        }
+
+        .viewer {
+            width: 100%;
+            height: calc(100vh - 110px);
+            border: 0;
+        }
+
+        .fallback {
+            padding: 1rem;
+        }
+
+        .muted {
+            opacity: .7;
+            font-size: .9rem;
+        }
+
+        @media (max-width: 640px) {
+            .viewer {
+                height: calc(100vh - 140px);
+            }
+        }
+    </style>
+</head>
+<body>
+<header>
+    <h1>Bikash Jena — Resume</h1>
+    <nav class="actions">
+        <a class="btn primary" href="./Bikash_Jena_Resume.pdf" rel="noopener" target="_blank">Open PDF</a>
+        <a class="btn" download href="./Bikash_Jena_Resume.pdf">Download</a>
+    </nav>
+</header>
+
+<main class="container" id="app">
+    <!-- Try embedded PDF (works in most modern browsers) -->
+    <object class="viewer" data="./Bikash_Jena_Resume.pdf" type="application/pdf">
+        <iframe class="viewer" src="./Bikash_Jena_Resume.pdf" title="Bikash Jena Resume PDF"></iframe>
+    </object>
+
+    <!-- Fallback content if PDF cannot be embedded -->
+    <div class="fallback">
+        <p class="muted">If the PDF preview does not load, use the buttons above to open or download the file.</p>
+    </div>
+</main>
+
+<footer>
+    <small class="muted">Hosted via Amazon S3 Static Website.</small>
+</footer>
+
+<script>
+    // If hosted on S3 with static website hosting, relative links work when
+    // index.html and the PDF are in the same folder. If you move the PDF to a
+    // different location or use CloudFront, update the hrefs above accordingly.
+</script>
+</body>
+</html>
