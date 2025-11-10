@@ -1,6 +1,7 @@
 package com.tutort.assignments.ReactiveJava.advanced;
 
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -55,7 +56,7 @@ public class ReactiveSchedulers {
      * subscribeOn: Controls WHERE the subscription happens
      * Affects the entire chain from source
      */
-    private static void demonstrateSubscribeOn() throws InterruptedException {
+    private static void demonstrateSubscribeOn() throws InterruptedException, ExecutionException {
         System.out.println("--- subscribeOn (WHERE subscription happens) ---");
 
         // Simulate different schedulers
@@ -96,7 +97,7 @@ public class ReactiveSchedulers {
      * publishOn: Controls WHERE downstream operations happen
      * Affects operations AFTER the publishOn call
      */
-    private static void demonstratePublishOn() throws InterruptedException {
+    private static void demonstratePublishOn() throws InterruptedException, ExecutionException {
         System.out.println("--- publishOn (WHERE downstream operations happen) ---");
 
         ExecutorService sourceScheduler = Executors.newSingleThreadExecutor(

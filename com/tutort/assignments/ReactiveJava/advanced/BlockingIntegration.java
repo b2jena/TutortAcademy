@@ -1,6 +1,7 @@
 package com.tutort.assignments.ReactiveJava.advanced;
 
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -47,7 +48,7 @@ public class BlockingIntegration {
     /**
      * Show the wrong way - blocking on reactive threads
      */
-    private static void demonstrateWrongWay() throws InterruptedException {
+    private static void demonstrateWrongWay() throws InterruptedException, ExecutionException {
         System.out.println("--- WRONG WAY: Blocking on Reactive Thread ---");
 
         ExecutorService reactiveEventLoop = Executors.newSingleThreadExecutor(
